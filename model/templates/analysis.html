@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#"
+      xmlns:fb="https://www.facebook.com/2008/fbml">
+<!--html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:fb="http://ogp.me/ns/fb#"-->
+  <head>
+    <link href="https://bootswatch.com/paper/bootstrap.min.css"
+          rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+          rel="stylesheet">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:title" content="Kinemai: Golf swing analysis"/>
+    <meta property="og:type" content="video" />
+    <meta property="og:description" content="Statistics of your golf swing "/>
+    <meta property="og:video:url" content="{{ MEDIA_URL}}{{ video }}"/>
+    <meta property="og:video:secure_url" content="{{ MEDIA_URL}}{{ video }}"/>
+    <!--meta property="og:image" content="{{ MEDIA_URL}}{{ video }}"/-->
+    <meta property="og:video:type" content="video/mp4"/>
+    <meta property="og:url" content="{{ request.build_absolute_uri }}"/>
+    <meta property="fb:app_id" content="1468961403146626"/>
+    <style>
+    /* set a max-width for horizontal fluid layout and make it centered */
+    .container {
+      margin-right: auto;
+      margin-left: auto;
+      max-width: 480px;
+    }
+    .videoInsert {
+    width: 100% !important;
+    height: auto !important;
+    }
+    </style>
+  </head>
+  <body>
+    <script>
+      window.fbAsyncInit = function() {
+      FB.init({
+      appId            : '1468961403146626',
+      autoLogAppEvents : true,
+      xfbml            : true,
+      version          : 'v2.9'
+      });
+      FB.AppEvents.logPageView();
+      };
+
+      (function(d, s, id){
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) {return;}
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/sdk.js";
+      fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+    </script>
+        
+    <div class="container black">
+      <div class="text-center" style="max-width: 480px">
+      <video class="videoInsert" width="414" height="736" controls autoplay loop>
+	<source src="{{ MEDIA_URL}}{{ video }}" type="video/mp4">
+	Your browser does not support the video tag.
+      </video>
+      <div style="margin: 10px; margin-bottom: 25px">
+	<a class="btn btn-success clearfix" href="instagram://library?AssetPath={{ request.build_absolute_uri|urlencode }}&InstagramCaption=Check%20out%20my%20swing!" data-size="large" style="padding-top: 10px; width: 50px;"><i class="fa fa-instagram" aria-hidden="true" style="font-size: 25px;"></i></a>
+	<a class="btn btn-success clearfix" href="fb-messenger://share?app_id=1468961403146626&link={{ request.build_absolute_uri|urlencode }}" data-size="large" style="padding-top: 10px; width: 50px;"><i class="fa fa-facebook" aria-hidden="true" style="font-size: 25px;"></i></a>
+	<!--div id="shareBtn" class="btn btn-success clearfix" style="padding-top: 10px; width: 50px;"><i class="fa fa-facebook" aria-hidden="true" style="font-size: 25px;"></i></div-->
+	<a class="btn btn-success clearfix" href="https://twitter.com/intent/tweet?text=Check%20out%20my%20swing%20analysis%20by%20%40kinemai%20{{ request.build_absolute_uri|urlencode }}%20%23golf%20%23golfswing%20%23golfswingvideo" data-size="large" style="padding-top: 10px; width: 50px;"><i class="fa fa-twitter" aria-hidden="true" style="font-size: 25px;"></i></a>
+      </div>
+      </div>
+      <div style="margin-bottom: 30px;">
+	{% if analysis.pose == "DTL" %}
+	  <h4>Back bend score: <b>{{ analysis.backbend_score|floatformat:0 }}</b><br /> <a href="https://www.golf-swing-advice.com/correctly-set-spine-address/#spine-pattern">(learn more)</a></h4>
+	  <div class="progress progress-striped">
+	    <div class="progress-bar progress-bar-success" style="width: {{ analysis.backbend_score }}%"></div>
+	  </div>
+	  <!-- Measure your club speed and learn how to gain yardage off the tee or fairway. -->
+	  <hr/>
+	  <h4>Alignment score: <b>{{ analysis.alignment_score|floatformat:0 }}</b><br /> <a href="https://www.golf-tweaks.com/weight-distribution-across-feet/">(learn more)</a></h4>
+	  <div class="progress progress-striped">
+	    <div class="progress-bar progress-bar-success" style="width: {{ analysis.alignment_score }}%"></div>
+	  </div>
+	  <!-- Measure your club speed and learn how to gain yardage off the tee or fairway. -->
+	  <hr/>
+	{% else %}
+	  <h4>Shoulder score: <b>{{ analysis.shoulder_score|floatformat:0 }}</b><br /> <a href="https://www.golf-swing-advice.com/correctly-set-spine-address/#spine-shoulders">(learn more)</a></h4>
+	  <div class="progress progress-striped">
+	    <div class="progress-bar progress-bar-success" style="width: {{ analysis.shoulder_score }}%"></div>
+	  </div>
+	  
+	  <!-- Measure your club speed and learn how to gain yardage off the tee or fairway. -->
+	  <hr/>
+	  <h4>Alignment score: <b>{{ analysis.alignment_score|floatformat:0 }}</b><br /> <a href="https://www.golf-tweaks.com/weight-distribution-across-feet/">(learn more)</a></h4>
+	  <div class="progress progress-striped">
+	    <div class="progress-bar progress-bar-success" style="width: {{ analysis.alignment_score }}%"></div>
+	  </div>
+	  
+	  
+	  <!-- Measure your club speed and learn how to gain yardage off the tee or fairway. -->
+	  <hr/>
+	{% endif %}
+
+	  <!--div class="text-center">
+	    <a href="/" class="btn btn-warning">Sumbit another swing</a>
+
+	  </div-->
+      </div>
+    </div>
+    <script>
+      document.getElementById('shareBtn').onclick = function() {
+      FB.ui({
+      method: 'share',
+      mobile_iframe: true,
+      href: '{{ request.build_absolute_uri }}',
+      }, function(response){});
+      }
+      </script>
+  </body>
+</html>
+ 

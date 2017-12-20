@@ -1,0 +1,11 @@
+*.pyc
+uploads/*
+out-red/*
+out/*
+frames/*
+*~
+.ipynb_checkpoints
+analysis
+downloads
+localsettings.py
+mydatabase
